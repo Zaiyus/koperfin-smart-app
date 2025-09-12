@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOPERFIN SMART</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div id="auth-page" class="page active">
+            <div class="auth-container">
+                <div class="app-info">
+                    <img src="logo-koperfin.png" alt="Logo KOPERFIN SMART" class="auth-logo">
+                    <h1 class="app-title">KOPERFIN SMART</h1>
+                    <p class="app-subtitle">Aplikasi Cerdas Perencanaan Keuangan</p>
+                </div>
+                
+                <div class="auth-box">
+                    <div class="auth-tabs">
+                        <button id="login-tab" class="tab-button active">Masuk</button>
+                        <button id="register-tab" class="tab-button">Daftar</button>
+                    </div>
+
+                    <form id="login-form" class="auth-form active">
+                        <h2>Masuk</h2>
+                        <div class="input-group">
+                            <label for="login-username">Nama Pengguna</label>
+                            <input type="text" id="login-username" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="login-password">Kata Sandi</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <p id="login-error-msg" class="error-message"></p>
+                        <button type="submit" class="auth-button">Masuk</button>
+                    </form>
+
+                    <form id="register-form" class="auth-form">
+                        <h2>Daftar</h2>
+                        <div class="input-group">
+                            <label for="reg-username">Nama Pengguna</label>
+                            <input type="text" id="reg-username" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg-password">Kata Sandi</label>
+                            <input type="password" id="reg-password" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="koperasi-id">ID Koperasi</label>
+                            <input type="text" id="koperasi-id" required>
+                        </div>
+                        <p id="register-error-msg" class="error-message"></p>
+                        <button type="submit" class="auth-button">Daftar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-dashboard" class="page">
+            <header>
+                <div class="header-left">
+                    <img src="logo-koperfin.png" alt="Logo KOPERFIN SMART" class="app-logo">
+                    <div class="greeting-text">
+                        <h1 class="greeting">Halo, <span id="user-name"></span>!</h1>
+                        <p>Selamat datang kembali.</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button id="logout-button" class="icon-button"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </header>
+
+            <div class="summary-cards">
+                <div class="card balance-card">
+                    <h3>Saldo Saat Ini</h3>
+                    <p class="balance-amount" id="total-balance">Rp0</p>
+                </div>
+                <div class="card income-card">
+                    <h3>Total Pemasukan</h3>
+                    <p class="balance-amount" id="total-income">Rp0</p>
+                </div>
+                <div class="card expense-card">
+                    <h3>Total Pengeluaran</h3>
+                    <p class="balance-amount" id="total-expense">Rp0</p>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <h2>Kelola Keuangan</h2>
+                <div class="input-group-inline">
+                    <div class="input-group">
+                        <label for="description">Deskripsi</label>
+                        <input type="text" id="description" placeholder="Deskripsi transaksi" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="amount">Jumlah</label>
+                        <input type="number" id="amount" placeholder="Jumlah (contoh: 50000)" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="type">Jenis Transaksi</label>
+                    <select id="type">
+                        <option value="income">Pemasukan</option>
+                        <option value="expense">Pengeluaran</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="payment-method">Metode Pembayaran</label>
+                    <select id="payment-method">
+                        <option value="cash">Tunai</option>
+                        <option value="bank_transfer">Transfer Bank</option>
+                    </select>
+                </div>
+                <button id="add-transaction-button" class="add-button">Tambah Transaksi</button>
+            </div>
+            
+            <div class="navigation-options">
+                <div class="option-card" id="history-option-card">
+                    <i class="fas fa-history"></i>
+                    <h3>Riwayat Transaksi</h3>
+                    <p>Lihat detail semua transaksi Anda.</p>
+                </div>
+                <div class="option-card" id="savings-option-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>Target Tabungan</h3>
+                    <p>Kelola dan pantau target tabungan Anda.</p>
+                </div>
+                <div class="option-card" id="loans-option-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Layanan Pinjaman</h3>
+                    <p>Ajukan pinjaman dan kelola angsuran Anda.</p>
+                </div>
+                <div class="option-card" id="reports-option-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Laporan Keuangan</h3>
+                    <p>Analisis pemasukan dan pengeluaran Anda.</p>
+                </div>
+            </div>
+
+            <div class="bottom-info">
+                <p>Dibuat oleh: Heniwati Gulo, S.E.,M.E.</p>
+                <p>Universitas Nias</p>
+                <p>Koperasi Merah Putih © 2025</p>
+            </div>
+        </div>
+
+        <div id="history-page" class="page">
+            <header>
+                <div class="header-left">
+                    <button id="back-to-dashboard-history" class="icon-button"><i class="fas fa-arrow-left"></i></button>
+                    <h1>Riwayat Transaksi</h1>
+                </div>
+            </header>
+            <div class="transaction-history-list" id="transaction-list">
+                </div>
+        </div>
+
+        <div id="savings-page" class="page">
+            <header>
+                <div class="header-left">
+                    <button id="back-to-dashboard-savings" class="icon-button"><i class="fas fa-arrow-left"></i></button>
+                    <h1>Target Tabungan</h1>
+                </div>
+            </header>
+            <div class="savings-form-section">
+                <h2>Tambah Target Baru</h2>
+                <div class="input-group">
+                    <label for="savings-goal-name">Nama Target</label>
+                    <input type="text" id="savings-goal-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="savings-goal-amount">Jumlah Target (Rp)</label>
+                    <input type="number" id="savings-goal-amount" required>
+                </div>
+                <div class="input-group">
+                    <label for="savings-current-amount">Jumlah Saat Ini (Rp)</label>
+                    <input type="number" id="savings-current-amount" required>
+                </div>
+                <button id="add-savings-goal-button" class="add-button">Simpan Target</button>
+            </div>
+            <div class="savings-list-section">
+                <h2>Daftar Target Tabungan</h2>
+                <div id="savings-goal-list">
+                    </div>
+            </div>
+        </div>
+
+        <div id="loans-page" class="page">
+            <header>
+                <div class="header-left">
+                    <button id="back-to-dashboard-loans" class="icon-button"><i class="fas fa-arrow-left"></i></button>
+                    <h1>Layanan Pinjaman</h1>
+                </div>
+            </header>
+            <div class="loans-form-section">
+                <h2>Ajukan Pinjaman</h2>
+                <div class="input-group">
+                    <label for="loan-amount">Jumlah Pinjaman (Rp)</label>
+                    <input type="number" id="loan-amount" required>
+                </div>
+                <div class="input-group">
+                    <label for="loan-term">Tenor (Bulan)</label>
+                    <input type="number" id="loan-term" required>
+                </div>
+                <button id="apply-loan-button" class="add-button">Ajukan Pinjaman</button>
+            </div>
+            <div class="loans-list-section">
+                <h2>Daftar Pinjaman Anda</h2>
+                <div id="loans-list">
+                    </div>
+            </div>
+        </div>
+
+        <div id="profile-page" class="page">
+            <header>
+                <div class="header-left">
+                    <button id="back-to-dashboard-profile" class="icon-button"><i class="fas fa-arrow-left"></i></button>
+                    <h1>Profil Pengguna</h1>
+                </div>
+            </header>
+            <div class="profile-card">
+                <h3>Informasi Akun</h3>
+                <p><strong>Nama Pengguna:</strong> <span id="profile-username"></span></p>
+                <p><strong>ID Koperasi:</strong> <span id="profile-koperasi-id"></span></p>
+            </div>
+        </div>
+        
+        <div id="reports-page" class="page">
+            <header>
+                <div class="header-left">
+                    <button id="back-to-dashboard-reports" class="icon-button"><i class="fas fa-arrow-left"></i></button>
+                    <h1>Laporan Keuangan</h1>
+                </div>
+            </header>
+            <div class="reports-section">
+                <div class="card">
+                    <h2>Tren Keuangan</h2>
+                    <canvas id="finance-chart"></canvas>
+                </div>
+                <div class="card finance-health-card">
+                    <h2>Analisis Kesehatan Keuangan</h2>
+                    <p id="finance-health-info">Memuat...</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <button id="home-button" class="nav-button active">
+                <i class="fas fa-home"></i>
+                <span>Beranda</span>
+            </button>
+            <button id="profile-button" class="nav-button">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <div id="notification-bar" class="notification-bar">
+        <span id="notification-message"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

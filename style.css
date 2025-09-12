@@ -1,0 +1,494 @@
+/* Import Google Fonts & Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Tema Merah Putih */
+    --primary-color: #A52A2A; /* Merah Marun / Merah Tua */
+    --secondary-color: #333333; /* Abu-abu Gelap untuk Kontras */
+    --accent-color: #E74C3C; /* Merah Cerah untuk Aksi atau Error */
+    --light-bg: #f4f7f6;
+    --dark-text: #2c3e50;
+    --light-text: #ecf0f1;
+    --card-bg: #ffffff;
+    --income-color: #343a40; /* Abu-abu untuk Pemasukan */
+    --expense-color: #E74C3C; /* Merah untuk Pengeluaran */
+    --savings-color: #005691; /* Biru Gelap untuk Tabungan */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--light-bg);
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Auth Page */
+#auth-page {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#auth-page.active {
+    display: flex;
+}
+
+.auth-container {
+    text-align: center;
+    width: 100%;
+}
+
+.app-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.auth-logo {
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.app-title { font-size: 2.5em; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+.app-subtitle { font-size: 1em; color: var(--secondary-color); margin-bottom: 20px; }
+
+.auth-box {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-tabs { display: flex; justify-content: center; margin-bottom: 20px; }
+.tab-button {
+    background-color: transparent; border: none; padding: 10px 20px; font-size: 1em; font-weight: 600; color: var(--secondary-color); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s ease;
+}
+
+.tab-button.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+.auth-form h2 { font-size: 1.5em; margin-bottom: 20px; color: var(--primary-color); }
+.input-group { margin-bottom: 15px; text-align: left; }
+
+.input-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 1em; background-color: #f9f9f9;
+}
+
+.auth-button {
+    width: 100%; padding: 15px; background-color: var(--primary-color); color: var(--light-text); border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease;
+}
+
+.auth-button:hover { background-color: #8B0000; }
+
+.error-message { color: var(--accent-color); text-align: center; margin-top: 15px; font-weight: 500; }
+
+/* Main App Pages */
+.page {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.5s ease-in-out;
+    padding-top: 80px; /* Jarak untuk header */
+    padding-bottom: 80px; /* Jarak untuk bottom-nav */
+    overflow-y: auto; /* Memastikan konten bisa di-scroll */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page.active {
+    display: block;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--light-bg);
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-logo {
+    height: 50px;
+    width: auto;
+}
+
+.greeting-text h1 { font-size: 1.4em; font-weight: 600; color: var(--primary-color); }
+.greeting-text p { font-size: 0.8em; color: var(--secondary-color); }
+.icon-button { background: none; border: none; font-size: 1.5em; color: var(--primary-color); cursor: pointer; transition: color 0.3s ease; margin-right: 0; }
+.icon-button:hover { color: var(--accent-color); }
+
+/* Main Content Sections */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+.card {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.card h3 { font-size: 0.9em; color: #777; margin-bottom: 5px; }
+.balance-amount { font-size: 1.5em; font-weight: 700; color: var(--dark-text); }
+.balance-card .balance-amount { color: var(--secondary-color); }
+.income-card .balance-amount { color: var(--income-color); }
+.expense-card .balance-amount { color: var(--expense-color); }
+
+.action-section, .loans-form-section, .savings-form-section, .savings-list-section {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.action-section h2, .loans-form-section h2, .savings-form-section h2, .savings-list-section h2, .loans-list-section h2 {
+    font-size: 1.4em; font-weight: 600; margin-bottom: 15px;
+}
+
+.input-group-inline { display: flex; gap: 15px; margin-bottom: 15px; }
+.input-group-inline .input-group { flex: 1; }
+
+.add-button {
+    width: 100%; padding: 12px; background-color: var(--primary-color); color: var(--light-text); border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease;
+}
+.add-button:hover { background-color: #8B0000; }
+
+.navigation-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.option-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.option-card i {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.option-card h3 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+.option-card p {
+    font-size: 0.8em;
+    color: #777;
+}
+
+.transaction-history-list, .savings-goal-list, .loans-list-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaction-item, .savings-goal-item, .loan-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+.transaction-item:hover, .savings-goal-item:hover, .loan-item:hover {
+    background-color: #eee;
+}
+
+.transaction-info, .loan-info { flex-grow: 1; }
+.transaction-info h4, .loan-info h4 { font-size: 1em; font-weight: 500; }
+.transaction-info p, .loan-info p { font-size: 0.8em; color: #777; }
+.transaction-amount-display { font-weight: 600; font-size: 1.1em; margin-right: 10px; }
+.transaction-amount-display.income { color: var(--income-color); }
+.transaction-amount-display.expense { color: var(--expense-color); }
+.loan-amount-display { font-weight: 600; font-size: 1.1em; color: var(--accent-color); }
+
+.bottom-info { text-align: center; font-size: 0.8em; color: #999; margin-top: 20px; }
+.bottom-info p { margin-bottom: 5px; }
+
+/* Savings Page */
+.savings-goal-item {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+}
+.progress-bar-container {
+    background-color: #ddd;
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.progress-bar {
+    background-color: var(--savings-color);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* Loan Page */
+.loans-list-section {
+    margin-top: 20px;
+}
+
+.loan-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.loan-item .loan-info h4 {
+    margin-bottom: 5px;
+}
+.loan-item .loan-info p {
+    font-size: 0.9em;
+}
+
+.loan-item .repayment-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loan-item .repayment-section p {
+    font-size: 0.8em;
+    color: #555;
+    margin-right: 10px;
+}
+
+.loan-item .repay-button {
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+.loan-item .repay-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Profile Page */
+.profile-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.profile-card h3 { font-size: 1.2em; margin-bottom: 10px; }
+.profile-card p { font-size: 1em; margin-bottom: 5px; }
+.profile-card strong { color: var(--primary-color); }
+
+/* Bottom Navigation */
+.bottom-nav {
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--card-bg);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    padding: 10px 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.page.active + .bottom-nav {
+    display: flex;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8em;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav-button.active {
+    color: var(--primary-color);
+}
+
+.nav-button i {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+/* Notifikasi */
+.notification-bar {
+    position: fixed;
+    bottom: -60px; /* Mulai dari luar layar */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+    transition: bottom 0.5s ease-in-out;
+}
+
+.notification-bar.show {
+    bottom: 20px; /* Naik ke atas saat ditampilkan */
+}
+
+.notification-bar.success {
+    background-color: #28a745;
+}
+
+.notification-bar.error {
+    background-color: #dc3545;
+}
+
+/* Reports Page */
+.reports-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.reports-section .card {
+    margin: 0;
+    /* Menambahkan tinggi ideal untuk grafik */
+    height: 300px;
+}
+
+/* Responsif untuk Layar Lebar */
+@media (min-width: 768px) {
+    body {
+        background-color: #dbe4e6;
+    }
+
+    .app-container {
+        max-width: 1000px;
+        min-height: 90vh;
+        border-radius: 15px;
+        margin: 20px auto;
+        overflow: hidden;
+    }
+
+    .page {
+        min-height: calc(90vh - 40px);
+        padding: 20px;
+        position: relative;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    header {
+        position: relative;
+        max-width: 100%;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        box-shadow: none;
+    }
+
+    .header-left {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .app-logo {
+        height: 200px;
+    }
+
+    .greeting-text h1 { font-size: 2.2em; }
+    .greeting-text p { font-size: 1em; }
+
+    .summary-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 0;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+
+    .navigation-options {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .bottom-nav {
+        position: absolute;
+        bottom: 0;
+        max-width: 1000px;
+        box-shadow: none;
+        padding: 10px 0;
+        margin-top: auto;
+    }
+}
